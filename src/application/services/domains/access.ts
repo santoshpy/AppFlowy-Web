@@ -9,4 +9,7 @@ export {
   revokeAccess,
   turnIntoMember,
   getShareWithMe,
+  grantObjectAccess,
+  getObjectGrants,
+  revokeObjectGrant,
 } from '../js-services/http/access-api';
