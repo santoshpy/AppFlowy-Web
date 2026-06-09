@@ -33,6 +33,16 @@ function SettingMenu({ selectedItem, onSelectItem }: SettingMenuProps) {
         IconComponent: MembersIcon,
       },
       {
+        value: SettingMenuItem.GROUPS,
+        label: 'Groups',
+        IconComponent: MembersIcon,
+      },
+      {
+        value: SettingMenuItem.ROLES,
+        label: 'Roles',
+        IconComponent: PersonIcon,
+      },
+      {
         value: SettingMenuItem.MANAGE_DATA,
         label: t('settings.manageData.menuLabel'),
         IconComponent: ManageDataIcon,

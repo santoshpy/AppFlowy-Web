@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 import { GroupService } from '@/application/services/domains';
 import { Group, GroupMember } from '@/application/types';
 import { ReactComponent as MoreIcon } from '@/assets/icons/more.svg';
-import { useCurrentWorkspaceId, useUserWorkspaceInfo } from '@/components/app/app.hooks';
-import { useCurrentUser } from '@/components/main/app.hooks';
+import { useCurrentWorkspaceId } from '@/components/app/app.hooks';
+import { useCan } from '@/components/app/hooks/usePermissions';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -20,8 +20,7 @@ import { getErrorMessage } from '@/utils/errors';
 
 export function GroupsPanel() {
   const currentWorkspaceId = useCurrentWorkspaceId();
-  const userWorkspaceInfo = useUserWorkspaceInfo();
-  const currentUser = useCurrentUser();
+  const canManage = useCan('group.manage');
 
   const [groups, setGroups] = useState<Group[]>([]);
   const [loadingGroups, setLoadingGroups] = useState(false);
@@ -33,12 +32,6 @@ export function GroupsPanel() {
   const [loadingMembers, setLoadingMembers] = useState(false);
   const [memberEmail, setMemberEmail] = useState('');
   const [addingMember, setAddingMember] = useState(false);
-
-  const isOwner = useMemo(() => {
-    const workspace = userWorkspaceInfo?.workspaces.find((w) => w.id === currentWorkspaceId);
-
-    return workspace?.owner?.uid.toString() === currentUser?.uid.toString();
-  }, [userWorkspaceInfo?.workspaces, currentWorkspaceId, currentUser?.uid]);
 
   const refreshGroups = useCallback(async () => {
     if (!currentWorkspaceId) return;
@@ -185,7 +178,7 @@ export function GroupsPanel() {
       </div>
       <div className='appflowy-scroller flex-1 overflow-y-auto px-8 py-6'>
         <div className='flex flex-col gap-6'>
-          {isOwner && (
+          {canManage && (
             <div className='flex flex-col gap-2'>
               <div className='text-sm font-semibold text-text-primary'>Create a group</div>
               <div className='flex gap-2'>
@@ -247,7 +240,7 @@ export function GroupsPanel() {
                       </span>
                     </div>
                   </button>
-                  {isOwner && (
+                  {canManage && (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <button
@@ -280,7 +273,7 @@ export function GroupsPanel() {
               <div className='text-sm font-semibold text-text-primary'>
                 Members of {selectedGroup.name}
               </div>
-              {isOwner && (
+              {canManage && (
                 <div className='flex gap-2'>
                   <Input
                     className='flex-1'
@@ -329,7 +322,7 @@ export function GroupsPanel() {
                       <span className='truncate font-medium text-text-primary'>{m.name || m.email}</span>
                       <span className='truncate text-xs text-text-secondary'>{m.email}</span>
                     </div>
-                    {isOwner ? (
+                    {canManage ? (
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <button

@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 import { RoleService } from '@/application/services/domains';
 import { Capability, CustomRole } from '@/application/types';
 import { ReactComponent as MoreIcon } from '@/assets/icons/more.svg';
-import { useCurrentWorkspaceId, useUserWorkspaceInfo } from '@/components/app/app.hooks';
-import { useCurrentUser } from '@/components/main/app.hooks';
+import { useCurrentWorkspaceId } from '@/components/app/app.hooks';
+import { useCan } from '@/components/app/hooks/usePermissions';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -26,20 +26,13 @@ interface RoleDraft {
 
 export function RolesPanel() {
   const currentWorkspaceId = useCurrentWorkspaceId();
-  const userWorkspaceInfo = useUserWorkspaceInfo();
-  const currentUser = useCurrentUser();
+  const canManage = useCan('role.manage');
 
   const [capabilities, setCapabilities] = useState<Capability[]>([]);
   const [roles, setRoles] = useState<CustomRole[]>([]);
   const [loading, setLoading] = useState(false);
   const [draft, setDraft] = useState<RoleDraft | null>(null);
   const [saving, setSaving] = useState(false);
-
-  const isOwner = useMemo(() => {
-    const workspace = userWorkspaceInfo?.workspaces.find((w) => w.id === currentWorkspaceId);
-
-    return workspace?.owner?.uid.toString() === currentUser?.uid.toString();
-  }, [userWorkspaceInfo?.workspaces, currentWorkspaceId, currentUser?.uid]);
 
   const refreshRoles = useCallback(async () => {
     if (!currentWorkspaceId) return;
@@ -145,7 +138,7 @@ export function RolesPanel() {
     <div className='flex h-full min-h-0 flex-1 flex-col overflow-hidden'>
       <div className='flex items-center justify-between border-b border-border-primary px-8 py-5'>
         <h2 className='text-xl font-semibold text-text-primary'>Roles</h2>
-        {isOwner && !draft && (
+        {canManage && !draft && (
           <Button onClick={startCreate} data-testid='role-new-button'>
             New role
           </Button>
@@ -229,7 +222,7 @@ export function RolesPanel() {
                 <button
                   type='button'
                   className='flex min-w-0 flex-1 flex-col text-left'
-                  onClick={() => isOwner && startEdit(r)}
+                  onClick={() => canManage && startEdit(r)}
                   data-testid={`role-edit-${r.id}`}
                 >
                   <span className='truncate font-medium text-text-primary'>{r.name}</span>
@@ -238,7 +231,7 @@ export function RolesPanel() {
                     {r.description ? ` · ${r.description}` : ''}
                   </span>
                 </button>
-                {isOwner && (
+                {canManage && (
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <button

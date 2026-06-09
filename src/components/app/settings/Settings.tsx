@@ -4,9 +4,11 @@ import { useSearchParams } from 'react-router-dom';
 
 import { SettingMenuItem } from '@/application/types';
 import { AccountAppPanel } from '@/components/app/settings/AccountAppPanel';
+import { GroupsPanel } from '@/components/app/settings/GroupsPanel';
 import { ManageDataPanel } from '@/components/app/settings/ManageDataPanel';
 import { MembersPanel } from '@/components/app/settings/MembersPanel';
 import { ProfilePanel } from '@/components/app/settings/ProfilePanel';
+import { RolesPanel } from '@/components/app/settings/RolesPanel';
 import SettingMenu from '@/components/app/settings/SettingMenu';
 
 interface SettingsDialogProps {
@@ -47,6 +49,8 @@ export function SettingsDialog({ open, onClose, onRequestOpen }: SettingsDialogP
         {selectedItem === SettingMenuItem.ACCOUNT && <AccountAppPanel />}
         {selectedItem === SettingMenuItem.PROFILE && <ProfilePanel />}
         {selectedItem === SettingMenuItem.MEMBERS && <MembersPanel />}
+        {selectedItem === SettingMenuItem.GROUPS && <GroupsPanel />}
+        {selectedItem === SettingMenuItem.ROLES && <RolesPanel />}
         {selectedItem === SettingMenuItem.MANAGE_DATA && <ManageDataPanel />}
       </div>
     </Dialog>

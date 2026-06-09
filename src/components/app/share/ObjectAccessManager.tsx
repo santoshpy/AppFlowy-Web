@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 import { AccessService } from '@/application/services/domains';
 import { AccessLevel, GrantObjectType, ObjectGrant } from '@/application/types';
 import { ReactComponent as MoreIcon } from '@/assets/icons/more.svg';
-import { useCurrentWorkspaceId, useUserWorkspaceInfo } from '@/components/app/app.hooks';
-import { useCurrentUser } from '@/components/main/app.hooks';
+import { useCurrentWorkspaceId } from '@/components/app/app.hooks';
+import { useCan } from '@/components/app/hooks/usePermissions';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -45,8 +45,7 @@ export interface ObjectAccessManagerProps {
  */
 export function ObjectAccessManager({ objectId, objectType, objectName }: ObjectAccessManagerProps) {
   const currentWorkspaceId = useCurrentWorkspaceId();
-  const userWorkspaceInfo = useUserWorkspaceInfo();
-  const currentUser = useCurrentUser();
+  const canManage = useCan('object.manage');
 
   const [grants, setGrants] = useState<ObjectGrant[]>([]);
   const [email, setEmail] = useState('');
@@ -54,12 +53,6 @@ export function ObjectAccessManager({ objectId, objectType, objectName }: Object
   const [loading, setLoading] = useState(false);
   const [granting, setGranting] = useState(false);
   const [revokingUid, setRevokingUid] = useState<number | null>(null);
-
-  const isOwner = useMemo(() => {
-    const workspace = userWorkspaceInfo?.workspaces.find((w) => w.id === currentWorkspaceId);
-
-    return workspace?.owner?.uid.toString() === currentUser?.uid.toString();
-  }, [userWorkspaceInfo?.workspaces, currentWorkspaceId, currentUser?.uid]);
 
   useEffect(() => {
     if (!currentWorkspaceId || !objectId) return;
@@ -140,7 +133,7 @@ export function ObjectAccessManager({ objectId, objectType, objectName }: Object
         {objectName && <span className='text-xs text-text-secondary'>{objectName}</span>}
       </div>
 
-      {isOwner && (
+      {canManage && (
         <div className='flex gap-2'>
           <Input
             className='flex-1'
@@ -203,7 +196,7 @@ export function ObjectAccessManager({ objectId, objectType, objectName }: Object
                 <span className='truncate text-xs text-text-secondary'>{g.email}</span>
               </div>
               <span className='text-text-secondary'>{accessLevelLabel(g.access_level)}</span>
-              {isOwner ? (
+              {canManage ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <button
