@@ -1677,3 +1677,21 @@ export enum AccessLevel {
   ReadAndWrite = 30,
   FullAccess = 50,
 }
+
+// Object-level RBAC (Django-style grants), Phase 1.
+// The kind of object a grant targets (a space/page object id is a folder
+// view / collab uuid; a workspace object id is the workspace uuid).
+export enum GrantObjectType {
+  Workspace = 'workspace',
+  Space = 'space',
+  Page = 'page',
+}
+
+// A single user grant on an object, with grantee identity, for listings.
+export interface ObjectGrant {
+  object_id: string;
+  uid: number;
+  email: string;
+  name: string;
+  access_level: AccessLevel;
+}

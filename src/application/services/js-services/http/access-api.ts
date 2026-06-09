@@ -2,8 +2,10 @@ import {
   AccessLevel,
   AFWebUser,
   GetRequestAccessInfoResponse,
+  GrantObjectType,
   Invitation,
   IPeopleWithAccessType,
+  ObjectGrant,
   RequestAccessInfoStatus,
   Role,
   View,
@@ -161,5 +163,44 @@ export async function getShareWithMe(workspaceId: string): Promise<View> {
 
   return executeAPIRequest<View>(() =>
     getAxios()?.get<APIResponse<View>>(url)
+  );
+}
+
+// --- Object-level RBAC grants (Phase 1) ---
+
+// Grant or update a user's access level on an object (workspace/space/page).
+export async function grantObjectAccess(
+  workspaceId: string,
+  params: { objectType: GrantObjectType; objectId: string; email: string; accessLevel: AccessLevel }
+) {
+  const url = `/api/object-grant/workspace/${workspaceId}`;
+
+  return executeAPIVoidRequest(() =>
+    getAxios()?.put<APIResponse>(url, {
+      object_type: params.objectType,
+      object_id: params.objectId,
+      email: params.email,
+      access_level: params.accessLevel,
+    })
+  );
+}
+
+// List the user grants on an object.
+export async function getObjectGrants(workspaceId: string, objectId: string): Promise<ObjectGrant[]> {
+  const url = `/api/object-grant/workspace/${workspaceId}/${objectId}`;
+
+  const data = await executeAPIRequest<{ grants: ObjectGrant[] }>(() =>
+    getAxios()?.get<APIResponse<{ grants: ObjectGrant[] }>>(url)
+  );
+
+  return data.grants;
+}
+
+// Revoke a user's grant on an object.
+export async function revokeObjectGrant(workspaceId: string, objectId: string, uid: number) {
+  const url = `/api/object-grant/workspace/${workspaceId}/${objectId}/user/${uid}`;
+
+  return executeAPIVoidRequest(() =>
+    getAxios()?.delete<APIResponse>(url)
   );
 }
