@@ -1710,3 +1710,19 @@ export interface GroupMember {
   email: string;
   name: string;
 }
+
+// Custom roles + capabilities (Phase 3). A capability is a named permission
+// (e.g. 'group.manage'); a custom role bundles capabilities and can be assigned
+// to workspace members to delegate those powers.
+export interface Capability {
+  capability: string;
+  name: string;
+  description?: string | null;
+}
+
+export interface CustomRole {
+  id: number;
+  name: string;
+  description?: string | null;
+  capabilities: string[];
+}

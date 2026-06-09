@@ -14,6 +14,7 @@ export * from './import-api';
 export * from './file-api';
 export * from './access-api';
 export * from './groups-api';
+export * from './roles-api';
 export * from './misc-api';
 
 // Note: http_api.ts is kept as a re-export file for integration test setup
