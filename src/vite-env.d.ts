@@ -1,6 +1,22 @@
 /// <reference types="vite/client" />
 /// <reference types="vite-plugin-svgr/client" />
 
+interface ImportMetaEnv {
+  // Backend connection (see dev.env / deploy.env)
+  readonly APPFLOWY_BASE_URL?: string;
+  readonly APPFLOWY_GOTRUE_BASE_URL?: string;
+  readonly APPFLOWY_WS_BASE_URL?: string;
+  // Brand identity (see src/application/brand.ts). All optional; default to AppFlowy.
+  readonly APPFLOWY_BRAND_NAME?: string;
+  readonly APPFLOWY_BRAND_DESCRIPTION?: string;
+  readonly APPFLOWY_BRAND_URL?: string;
+  readonly APPFLOWY_BRAND_TWITTER?: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
 interface Window {
   refresh_token: (token: string) => void;
   invalid_token: () => void;
