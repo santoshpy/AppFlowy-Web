@@ -1,11 +1,14 @@
+import { Dialog } from '@mui/material';
 import { lazy, Suspense, useCallback, useEffect, useMemo, useState, type ComponentProps } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { APP_EVENTS } from '@/application/constants';
-import { Role, ViewLayout } from '@/application/types';
+import { GrantObjectType, Role, ViewLayout } from '@/application/types';
 import { ReactComponent as AddToPageIcon } from '@/assets/icons/add_to_page.svg';
 import { ReactComponent as MoreIcon } from '@/assets/icons/more.svg';
 import { ReactComponent as SearchIcon } from '@/assets/icons/search.svg';
+import { ReactComponent as PeopleIcon } from '@/assets/icons/users.svg';
+import { ObjectAccessManager } from '@/components/app/share/ObjectAccessManager';
 import { findViewInShareWithMe } from '@/components/_shared/outline/utils';
 import { useAIChatContext } from '@/components/ai-chat/AIChatProvider';
 import { AIService } from '@/application/services/domains';
@@ -43,6 +46,7 @@ function MoreActions({
   const [hasMessages, setHasMessages] = useState(false);
   const [open, setOpen] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
+  const [accessOpen, setAccessOpen] = useState(false);
   const outline = useAppOutline();
 
   const view = useAppView(viewId);
@@ -107,7 +111,13 @@ function MoreActions({
 
   useEffect(() => {
     setHistoryOpen(false);
+    setAccessOpen(false);
   }, [viewId]);
+
+  const handleManageAccess = useCallback(() => {
+    handleClose();
+    setAccessOpen(true);
+  }, [handleClose]);
 
   const pageHistoryEnabled = usePageHistoryEnabled();
   const showHistory = enableVersionHistory && pageHistoryEnabled && view?.layout === ViewLayout.Document;
@@ -175,6 +185,17 @@ function MoreActions({
                 onFindAndReplace={isDocument ? handleFindAndReplace : undefined}
               />
               <DropdownMenuSeparator />
+              <DropdownMenuItem
+                data-testid={'more-page-manage-access'}
+                onSelect={(event) => {
+                  event.preventDefault();
+                  handleManageAccess();
+                }}
+              >
+                <PeopleIcon />
+                Manage access
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
             </>
           )}
 
@@ -186,6 +207,18 @@ function MoreActions({
           <DocumentHistoryModal open={historyOpen} onOpenChange={setHistoryOpen} viewId={viewId} view={view} />
         </Suspense>
       )}
+      <Dialog
+        open={accessOpen}
+        onClose={() => setAccessOpen(false)}
+        classes={{ paper: 'w-[520px] max-w-[92vw] bg-surface-primary p-6' }}
+        PaperProps={{ 'data-testid': 'manage-access-dialog' }}
+      >
+        <ObjectAccessManager
+          objectId={viewId}
+          objectType={GrantObjectType.Page}
+          objectName={view?.name}
+        />
+      </Dialog>
     </>
   );
 }

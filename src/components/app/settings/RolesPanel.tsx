@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 import { RoleService } from '@/application/services/domains';
-import { Capability, CustomRole } from '@/application/types';
+import { Capability, CustomRole, GroupMember } from '@/application/types';
 import { ReactComponent as MoreIcon } from '@/assets/icons/more.svg';
 import { useCurrentWorkspaceId } from '@/components/app/app.hooks';
 import { useCan } from '@/components/app/hooks/usePermissions';
@@ -33,6 +33,82 @@ export function RolesPanel() {
   const [loading, setLoading] = useState(false);
   const [draft, setDraft] = useState<RoleDraft | null>(null);
   const [saving, setSaving] = useState(false);
+
+  // Member-assignment management for a selected role.
+  const [managingRole, setManagingRole] = useState<CustomRole | null>(null);
+  const [roleMembers, setRoleMembers] = useState<GroupMember[]>([]);
+  const [loadingMembers, setLoadingMembers] = useState(false);
+  const [assignEmail, setAssignEmail] = useState('');
+  const [assigning, setAssigning] = useState(false);
+
+  const refreshRoleMembers = useCallback(
+    async (roleId: number) => {
+      if (!currentWorkspaceId) return;
+      try {
+        setRoleMembers(await RoleService.getRoleMembers(currentWorkspaceId, roleId));
+      } catch (e) {
+        toast.error(getErrorMessage(e));
+      }
+    },
+    [currentWorkspaceId]
+  );
+
+  useEffect(() => {
+    if (!currentWorkspaceId || !managingRole) {
+      setRoleMembers([]);
+      return;
+    }
+
+    let cancelled = false;
+
+    setLoadingMembers(true);
+    void (async () => {
+      try {
+        const list = await RoleService.getRoleMembers(currentWorkspaceId, managingRole.id);
+
+        if (!cancelled) setRoleMembers(list);
+      } catch (e) {
+        if (!cancelled) toast.error(getErrorMessage(e));
+      } finally {
+        if (!cancelled) setLoadingMembers(false);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [currentWorkspaceId, managingRole]);
+
+  const handleAssign = useCallback(async () => {
+    const email = assignEmail.trim();
+
+    if (!currentWorkspaceId || !managingRole || !email) return;
+    setAssigning(true);
+    try {
+      await RoleService.assignRole(currentWorkspaceId, { email, roleId: managingRole.id });
+      toast.success('Role assigned');
+      setAssignEmail('');
+      await refreshRoleMembers(managingRole.id);
+    } catch (e) {
+      toast.error(getErrorMessage(e));
+    } finally {
+      setAssigning(false);
+    }
+  }, [assignEmail, currentWorkspaceId, managingRole, refreshRoleMembers]);
+
+  const handleUnassign = useCallback(
+    async (uid: number) => {
+      if (!currentWorkspaceId || !managingRole) return;
+      try {
+        await RoleService.unassignRole(currentWorkspaceId, managingRole.id, uid);
+        toast.success('Role removed from member');
+        await refreshRoleMembers(managingRole.id);
+      } catch (e) {
+        toast.error(getErrorMessage(e));
+      }
+    },
+    [currentWorkspaceId, managingRole, refreshRoleMembers]
+  );
 
   const refreshRoles = useCallback(async () => {
     if (!currentWorkspaceId) return;
@@ -145,7 +221,78 @@ export function RolesPanel() {
         )}
       </div>
       <div className='appflowy-scroller flex-1 overflow-y-auto px-8 py-6'>
-        {draft ? (
+        {managingRole ? (
+          <div className='flex flex-col gap-4'>
+            <div className='flex items-center gap-2'>
+              <Button
+                variant='outline'
+                onClick={() => setManagingRole(null)}
+                data-testid='role-members-back'
+              >
+                ← Back
+              </Button>
+              <div className='text-sm font-semibold text-text-primary'>
+                Members with role “{managingRole.name}”
+              </div>
+            </div>
+            {canManage && (
+              <div className='flex gap-2'>
+                <Input
+                  className='flex-1'
+                  value={assignEmail}
+                  placeholder='Assign to a workspace member by email'
+                  onChange={(e) => setAssignEmail(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !assigning && assignEmail.trim()) {
+                      void handleAssign();
+                    }
+                  }}
+                  data-testid='role-assign-email-input'
+                />
+                <Button
+                  onClick={() => void handleAssign()}
+                  disabled={!assignEmail.trim() || assigning}
+                  loading={assigning}
+                  data-testid='role-assign-button'
+                >
+                  {assigning && <Progress />}
+                  Assign
+                </Button>
+              </div>
+            )}
+            {loadingMembers && roleMembers.length === 0 ? (
+              <div className='py-4 text-center text-sm text-text-secondary'>
+                <Progress />
+              </div>
+            ) : roleMembers.length === 0 ? (
+              <div className='py-4 text-center text-sm text-text-secondary'>
+                No members have this role yet
+              </div>
+            ) : (
+              roleMembers.map((m) => (
+                <div
+                  key={m.uid}
+                  data-testid={`role-member-row-${m.uid}`}
+                  className='flex items-center gap-3 py-2 text-sm'
+                >
+                  <div className='flex min-w-0 flex-1 flex-col'>
+                    <span className='truncate font-medium text-text-primary'>{m.name || m.email}</span>
+                    <span className='truncate text-xs text-text-secondary'>{m.email}</span>
+                  </div>
+                  {canManage && (
+                    <Button
+                      variant='outline'
+                      onClick={() => void handleUnassign(m.uid)}
+                      data-testid={`role-unassign-${m.uid}`}
+                    >
+                      Remove
+                    </Button>
+                  )}
+                </div>
+              ))
+            )}
+          </div>
+        ) : draft ? (
           <div className='flex flex-col gap-4'>
             <div className='text-sm font-semibold text-text-primary'>
               {draft.id !== undefined ? 'Edit role' : 'New role'}
@@ -246,6 +393,12 @@ export function RolesPanel() {
                     <DropdownMenuContent align='end'>
                       <DropdownMenuItem onSelect={() => startEdit(r)} data-testid={`role-edit-menu-${r.id}`}>
                         Edit
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onSelect={() => setManagingRole(r)}
+                        data-testid={`role-members-menu-${r.id}`}
+                      >
+                        Manage members
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         variant='destructive'

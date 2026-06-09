@@ -1,4 +1,4 @@
-import { Capability, CustomRole } from '@/application/types';
+import { Capability, CustomRole, GroupMember } from '@/application/types';
 
 import { APIResponse, executeAPIRequest, executeAPIVoidRequest, getAxios } from './core';
 
@@ -73,6 +73,16 @@ export async function deleteRole(workspaceId: string, roleId: number) {
   return executeAPIVoidRequest(() =>
     getAxios()?.delete<APIResponse>(url)
   );
+}
+
+export async function getRoleMembers(workspaceId: string, roleId: number): Promise<GroupMember[]> {
+  const url = `/api/role/workspace/${workspaceId}/${roleId}/member`;
+
+  const data = await executeAPIRequest<{ members: GroupMember[] }>(() =>
+    getAxios()?.get<APIResponse<{ members: GroupMember[] }>>(url)
+  );
+
+  return data.members;
 }
 
 export async function assignRole(workspaceId: string, params: { email: string; roleId: number }) {
