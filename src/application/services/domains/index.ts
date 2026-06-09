@@ -8,6 +8,7 @@ export * as PublishService from './publish';
 export * as TemplateService from './template';
 export * as BillingService from './billing';
 export * as AccessService from './access';
+export * as GroupService from './groups';
 export * as FileService from './file';
 export * as ExportService from './export';
 export * as SearchService from './search';

@@ -1695,3 +1695,18 @@ export interface ObjectGrant {
   name: string;
   access_level: AccessLevel;
 }
+
+// Groups (Phase 2): a named collection of workspace members that can be granted
+// access to objects collectively.
+export interface Group {
+  id: string;
+  name: string;
+  description?: string | null;
+  member_count: number;
+}
+
+export interface GroupMember {
+  uid: number;
+  email: string;
+  name: string;
+}
