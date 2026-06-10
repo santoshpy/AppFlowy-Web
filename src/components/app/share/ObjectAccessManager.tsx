@@ -6,7 +6,7 @@ import { AccessLevel, GrantObjectType, ObjectGrant } from '@/application/types';
 import { ReactComponent as MoreIcon } from '@/assets/icons/more.svg';
 import { useCurrentWorkspaceId } from '@/components/app/app.hooks';
 import { useCan } from '@/components/app/hooks/usePermissions';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -180,7 +180,6 @@ export function ObjectAccessManager({ objectId, objectType, objectName }: Object
               className='flex items-center gap-3 py-2 text-sm'
             >
               <Avatar size='md'>
-                <AvatarImage src={undefined} alt={g.name} />
                 <AvatarFallback name={g.name}>{(g.name || g.email).charAt(0).toUpperCase()}</AvatarFallback>
               </Avatar>
               <div className='flex min-w-0 flex-1 flex-col'>
