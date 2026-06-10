@@ -40,18 +40,9 @@ export function RolesPanel() {
   const [loadingMembers, setLoadingMembers] = useState(false);
   const [assignEmail, setAssignEmail] = useState('');
   const [assigning, setAssigning] = useState(false);
-
-  const refreshRoleMembers = useCallback(
-    async (roleId: number) => {
-      if (!currentWorkspaceId) return;
-      try {
-        setRoleMembers(await RoleService.getRoleMembers(currentWorkspaceId, roleId));
-      } catch (e) {
-        toast.error(getErrorMessage(e));
-      }
-    },
-    [currentWorkspaceId]
-  );
+  // Bumped after assign/unassign to re-run the cancellable member fetch below
+  // (instead of an unguarded imperative refresh that could stale-write).
+  const [memberReloadKey, setMemberReloadKey] = useState(0);
 
   useEffect(() => {
     if (!currentWorkspaceId || !managingRole) {
@@ -77,7 +68,7 @@ export function RolesPanel() {
     return () => {
       cancelled = true;
     };
-  }, [currentWorkspaceId, managingRole]);
+  }, [currentWorkspaceId, managingRole, memberReloadKey]);
 
   const handleAssign = useCallback(async () => {
     const email = assignEmail.trim();
@@ -88,13 +79,13 @@ export function RolesPanel() {
       await RoleService.assignRole(currentWorkspaceId, { email, roleId: managingRole.id });
       toast.success('Role assigned');
       setAssignEmail('');
-      await refreshRoleMembers(managingRole.id);
+      setMemberReloadKey((k) => k + 1);
     } catch (e) {
       toast.error(getErrorMessage(e));
     } finally {
       setAssigning(false);
     }
-  }, [assignEmail, currentWorkspaceId, managingRole, refreshRoleMembers]);
+  }, [assignEmail, currentWorkspaceId, managingRole]);
 
   const handleUnassign = useCallback(
     async (uid: number) => {
@@ -102,12 +93,12 @@ export function RolesPanel() {
       try {
         await RoleService.unassignRole(currentWorkspaceId, managingRole.id, uid);
         toast.success('Role removed from member');
-        await refreshRoleMembers(managingRole.id);
+        setMemberReloadKey((k) => k + 1);
       } catch (e) {
         toast.error(getErrorMessage(e));
       }
     },
-    [currentWorkspaceId, managingRole, refreshRoleMembers]
+    [currentWorkspaceId, managingRole]
   );
 
   const refreshRoles = useCallback(async () => {

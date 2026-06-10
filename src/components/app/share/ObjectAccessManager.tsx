@@ -53,6 +53,9 @@ export function ObjectAccessManager({ objectId, objectType, objectName }: Object
   const [loading, setLoading] = useState(false);
   const [granting, setGranting] = useState(false);
   const [revokingUid, setRevokingUid] = useState<number | null>(null);
+  // Bumped after a mutation to re-run the single cancellable fetch below, instead
+  // of an unguarded imperative refresh (which could stale-write after unmount).
+  const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
     if (!currentWorkspaceId || !objectId) return;
@@ -74,18 +77,7 @@ export function ObjectAccessManager({ objectId, objectType, objectName }: Object
     return () => {
       cancelled = true;
     };
-  }, [currentWorkspaceId, objectId]);
-
-  const refresh = useCallback(async () => {
-    if (!currentWorkspaceId || !objectId) return;
-    try {
-      const list = await AccessService.getObjectGrants(currentWorkspaceId, objectId);
-
-      setGrants(list);
-    } catch (e) {
-      toast.error(getErrorMessage(e));
-    }
-  }, [currentWorkspaceId, objectId]);
+  }, [currentWorkspaceId, objectId, reloadKey]);
 
   const handleGrant = useCallback(async () => {
     const trimmed = email.trim();
@@ -101,13 +93,13 @@ export function ObjectAccessManager({ objectId, objectType, objectName }: Object
       });
       toast.success('Access granted');
       setEmail('');
-      await refresh();
+      setReloadKey((k) => k + 1);
     } catch (e) {
       toast.error(getErrorMessage(e));
     } finally {
       setGranting(false);
     }
-  }, [currentWorkspaceId, email, level, objectId, objectType, refresh]);
+  }, [currentWorkspaceId, email, level, objectId, objectType]);
 
   const handleRevoke = useCallback(
     async (uid: number) => {
@@ -116,14 +108,14 @@ export function ObjectAccessManager({ objectId, objectType, objectName }: Object
       try {
         await AccessService.revokeObjectGrant(currentWorkspaceId, objectId, uid);
         toast.success('Access revoked');
-        await refresh();
+        setReloadKey((k) => k + 1);
       } catch (e) {
         toast.error(getErrorMessage(e));
       } finally {
         setRevokingUid(null);
       }
     },
-    [currentWorkspaceId, objectId, refresh]
+    [currentWorkspaceId, objectId]
   );
 
   return (

@@ -6,6 +6,7 @@ import { ReactComponent as ManageDataIcon } from '@/assets/icons/database.svg';
 import { ReactComponent as MembersIcon } from '@/assets/icons/users.svg';
 import { ReactComponent as ProfileIcon } from '@/assets/icons/person.svg';
 import { ReactComponent as PersonIcon } from '@/assets/icons/user.svg';
+import { useCan } from '@/components/app/hooks/usePermissions';
 
 interface SettingMenuProps {
   selectedItem: SettingMenuItem;
@@ -14,6 +15,10 @@ interface SettingMenuProps {
 
 function SettingMenu({ selectedItem, onSelectItem }: SettingMenuProps) {
   const { t } = useTranslation();
+  // Only surface the admin RBAC tabs to users who can actually manage them;
+  // enforcement is server-side, this just avoids showing members broken tabs.
+  const canManageGroups = useCan('group.manage');
+  const canManageRoles = useCan('role.manage');
 
   const options = useMemo(() => {
     return [
@@ -32,23 +37,19 @@ function SettingMenu({ selectedItem, onSelectItem }: SettingMenuProps) {
         label: t('settings.appearance.members.label'),
         IconComponent: MembersIcon,
       },
-      {
-        value: SettingMenuItem.GROUPS,
-        label: 'Groups',
-        IconComponent: MembersIcon,
-      },
-      {
-        value: SettingMenuItem.ROLES,
-        label: 'Roles',
-        IconComponent: PersonIcon,
-      },
+      ...(canManageGroups
+        ? [{ value: SettingMenuItem.GROUPS, label: 'Groups', IconComponent: MembersIcon }]
+        : []),
+      ...(canManageRoles
+        ? [{ value: SettingMenuItem.ROLES, label: 'Roles', IconComponent: PersonIcon }]
+        : []),
       {
         value: SettingMenuItem.MANAGE_DATA,
         label: t('settings.manageData.menuLabel'),
         IconComponent: ManageDataIcon,
       },
     ];
-  }, [t]);
+  }, [t, canManageGroups, canManageRoles]);
 
   return (
     <div className={'flex h-full w-[228px] flex-col gap-1 overflow-y-auto overflow-x-hidden bg-surface-container-layer-01 px-2 py-4'}>

@@ -32,17 +32,10 @@ export function GroupsPanel() {
   const [loadingMembers, setLoadingMembers] = useState(false);
   const [memberEmail, setMemberEmail] = useState('');
   const [addingMember, setAddingMember] = useState(false);
-
-  const refreshGroups = useCallback(async () => {
-    if (!currentWorkspaceId) return;
-    try {
-      const list = await GroupService.getGroups(currentWorkspaceId);
-
-      setGroups(list);
-    } catch (e) {
-      toast.error(getErrorMessage(e));
-    }
-  }, [currentWorkspaceId]);
+  // Bumped after a mutation to re-run the cancellable fetches below (avoids an
+  // unguarded imperative refresh that can stale-write after unmount).
+  const [groupsReloadKey, setGroupsReloadKey] = useState(0);
+  const [membersReloadKey, setMembersReloadKey] = useState(0);
 
   useEffect(() => {
     if (!currentWorkspaceId) return;
@@ -64,21 +57,7 @@ export function GroupsPanel() {
     return () => {
       cancelled = true;
     };
-  }, [currentWorkspaceId]);
-
-  const refreshMembers = useCallback(
-    async (groupId: string) => {
-      if (!currentWorkspaceId) return;
-      try {
-        const list = await GroupService.getGroupMembers(currentWorkspaceId, groupId);
-
-        setMembers(list);
-      } catch (e) {
-        toast.error(getErrorMessage(e));
-      }
-    },
-    [currentWorkspaceId]
-  );
+  }, [currentWorkspaceId, groupsReloadKey]);
 
   useEffect(() => {
     if (!currentWorkspaceId || !selectedGroup) {
@@ -115,13 +94,13 @@ export function GroupsPanel() {
       await GroupService.createGroup(currentWorkspaceId, { name });
       toast.success('Group created');
       setNewName('');
-      await refreshGroups();
+      setGroupsReloadKey((k) => k + 1);
     } catch (e) {
       toast.error(getErrorMessage(e));
     } finally {
       setCreating(false);
     }
-  }, [currentWorkspaceId, newName, refreshGroups]);
+  }, [currentWorkspaceId, newName]);
 
   const handleDelete = useCallback(
     async (group: Group) => {
@@ -130,12 +109,12 @@ export function GroupsPanel() {
         await GroupService.deleteGroup(currentWorkspaceId, group.id);
         toast.success('Group deleted');
         if (selectedGroup?.id === group.id) setSelectedGroup(null);
-        await refreshGroups();
+        setGroupsReloadKey((k) => k + 1);
       } catch (e) {
         toast.error(getErrorMessage(e));
       }
     },
-    [currentWorkspaceId, refreshGroups, selectedGroup?.id]
+    [currentWorkspaceId, selectedGroup?.id]
   );
 
   const handleAddMember = useCallback(async () => {
@@ -147,14 +126,15 @@ export function GroupsPanel() {
       await GroupService.addGroupMember(currentWorkspaceId, selectedGroup.id, email);
       toast.success('Member added');
       setMemberEmail('');
-      await refreshMembers(selectedGroup.id);
-      await refreshGroups();
+      // Refresh the member list and the group list (member_count badge).
+      setMembersReloadKey((k) => k + 1);
+      setGroupsReloadKey((k) => k + 1);
     } catch (e) {
       toast.error(getErrorMessage(e));
     } finally {
       setAddingMember(false);
     }
-  }, [currentWorkspaceId, memberEmail, refreshGroups, refreshMembers, selectedGroup]);
+  }, [currentWorkspaceId, memberEmail, selectedGroup]);
 
   const handleRemoveMember = useCallback(
     async (uid: number) => {
@@ -162,13 +142,13 @@ export function GroupsPanel() {
       try {
         await GroupService.removeGroupMember(currentWorkspaceId, selectedGroup.id, uid);
         toast.success('Member removed');
-        await refreshMembers(selectedGroup.id);
-        await refreshGroups();
+        setMembersReloadKey((k) => k + 1);
+        setGroupsReloadKey((k) => k + 1);
       } catch (e) {
         toast.error(getErrorMessage(e));
       }
     },
-    [currentWorkspaceId, refreshGroups, refreshMembers, selectedGroup]
+    [currentWorkspaceId, selectedGroup]
   );
 
   return (
