@@ -83,7 +83,7 @@ export function GroupsPanel() {
     return () => {
       cancelled = true;
     };
-  }, [currentWorkspaceId, selectedGroup]);
+  }, [currentWorkspaceId, selectedGroup, membersReloadKey]);
 
   const handleCreate = useCallback(async () => {
     const name = newName.trim();
