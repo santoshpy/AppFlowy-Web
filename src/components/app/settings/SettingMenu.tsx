@@ -43,6 +43,13 @@ function SettingMenu({ selectedItem, onSelectItem }: SettingMenuProps) {
       ...(canManageRoles
         ? [{ value: SettingMenuItem.ROLES, label: 'Roles', IconComponent: PersonIcon }]
         : []),
+      // Organizations are user-scoped (not a workspace capability), so always shown;
+      // member management is enforced server-side.
+      {
+        value: SettingMenuItem.ORGANIZATIONS,
+        label: 'Organizations',
+        IconComponent: MembersIcon,
+      },
       {
         value: SettingMenuItem.MANAGE_DATA,
         label: t('settings.manageData.menuLabel'),

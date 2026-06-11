@@ -1577,6 +1577,7 @@ export enum SettingMenuItem {
   MEMBERS = 'MEMBERS',
   GROUPS = 'GROUPS',
   ROLES = 'ROLES',
+  ORGANIZATIONS = 'ORGANIZATIONS',
   MANAGE_DATA = 'MANAGE_DATA',
   SITES = 'SITES',
 }
@@ -1711,6 +1712,22 @@ export interface GroupMember {
   uid: number;
   email: string;
   name: string;
+}
+
+// Organization tier (Model B): an org groups multiple workspaces under central
+// administration. org_role: 1 = OrgAdmin, 2 = OrgMember.
+export interface Organization {
+  org_id: string;
+  name: string;
+  owner_uid: number;
+}
+
+export interface OrganizationMember {
+  // String because uids are i64 snowflakes beyond JS's safe integer range.
+  uid: string;
+  email: string;
+  name: string;
+  org_role: number;
 }
 
 // Custom roles + capabilities (Phase 3). A capability is a named permission

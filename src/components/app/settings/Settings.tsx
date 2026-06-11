@@ -7,6 +7,7 @@ import { AccountAppPanel } from '@/components/app/settings/AccountAppPanel';
 import { GroupsPanel } from '@/components/app/settings/GroupsPanel';
 import { ManageDataPanel } from '@/components/app/settings/ManageDataPanel';
 import { MembersPanel } from '@/components/app/settings/MembersPanel';
+import { OrganizationsPanel } from '@/components/app/settings/OrganizationsPanel';
 import { ProfilePanel } from '@/components/app/settings/ProfilePanel';
 import { RolesPanel } from '@/components/app/settings/RolesPanel';
 import SettingMenu from '@/components/app/settings/SettingMenu';
@@ -51,6 +52,7 @@ export function SettingsDialog({ open, onClose, onRequestOpen }: SettingsDialogP
         {selectedItem === SettingMenuItem.MEMBERS && <MembersPanel />}
         {selectedItem === SettingMenuItem.GROUPS && <GroupsPanel />}
         {selectedItem === SettingMenuItem.ROLES && <RolesPanel />}
+        {selectedItem === SettingMenuItem.ORGANIZATIONS && <OrganizationsPanel />}
         {selectedItem === SettingMenuItem.MANAGE_DATA && <ManageDataPanel />}
       </div>
     </Dialog>

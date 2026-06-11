@@ -10,6 +10,7 @@ export * as BillingService from './billing';
 export * as AccessService from './access';
 export * as GroupService from './groups';
 export * as RoleService from './roles';
+export * as OrganizationService from './organizations';
 export * as FileService from './file';
 export * as ExportService from './export';
 export * as SearchService from './search';
