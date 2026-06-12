@@ -3,6 +3,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'sonner';
 
+import { BRAND } from '@/application/brand';
 import { ERROR_CODE } from '@/application/constants';
 import {
   GetRequestAccessInfoResponse,
@@ -269,10 +270,10 @@ function ApproveRequestPage() {
               components={{
                 email: (
                   <span
-                    onClick={() => window.open(`mailto:support@appflowy.io`, '_blank')}
+                    onClick={() => window.open(`mailto:${BRAND.supportEmail}`, '_blank')}
                     className={'cursor-pointer text-text-action underline'}
                   >
-                    support@appflowy.io
+                    {BRAND.supportEmail}
                   </span>
                 ),
               }}

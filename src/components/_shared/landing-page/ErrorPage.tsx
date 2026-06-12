@@ -2,6 +2,7 @@ import { ReactNode, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
+import { BRAND } from '@/application/brand';
 import { ReactComponent as ErrorLogo } from '@/assets/icons/warning_logo.svg';
 import { getLandingPageErrorContent, LandingPageError } from '@/components/_shared/landing-page/errorContent';
 import LandingPage from '@/components/_shared/landing-page/LandingPage';
@@ -53,10 +54,10 @@ export function ErrorPage({ onRetry, error, title, description }: ErrorPageProps
             )}
             {t('landingPage.error.contact', 'contact ')}
             <span
-              onClick={() => window.open('mailto:support@appflowy.io', '_blank')}
+              onClick={() => window.open(`mailto:${BRAND.supportEmail}`, '_blank')}
               className='cursor-pointer text-text-action hover:underline'
             >
-              support@appflowy.io
+              {BRAND.supportEmail}
             </span>
             .
           </div>

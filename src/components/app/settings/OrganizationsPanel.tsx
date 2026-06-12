@@ -110,7 +110,7 @@ export function OrganizationsPanel() {
     setCreating(true);
     try {
       await OrganizationService.createOrganization({ name });
-      toast.success('Organization created');
+      toast.success('Department created');
       setNewName('');
       setOrgsReloadKey((k) => k + 1);
     } catch (e) {
@@ -170,7 +170,7 @@ export function OrganizationsPanel() {
     setAttaching(true);
     try {
       await OrganizationService.attachWorkspaceToOrg(selectedOrg.org_id, currentWorkspaceId);
-      toast.success('Current workspace added to the organization');
+      toast.success('Current workspace added to the department');
     } catch (e) {
       toast.error(getErrorMessage(e));
     } finally {
@@ -181,17 +181,17 @@ export function OrganizationsPanel() {
   return (
     <div className='flex h-full min-h-0 flex-1 flex-col overflow-hidden'>
       <div className='border-b border-border-primary px-8 py-5'>
-        <h2 className='text-xl font-semibold text-text-primary'>Organizations</h2>
+        <h2 className='text-xl font-semibold text-text-primary'>Departments</h2>
       </div>
       <div className='appflowy-scroller flex-1 overflow-y-auto px-8 py-6'>
         <div className='flex flex-col gap-6'>
           <div className='flex flex-col gap-2'>
-            <div className='text-sm font-semibold text-text-primary'>Create an organization</div>
+            <div className='text-sm font-semibold text-text-primary'>Create a department</div>
             <div className='flex gap-2'>
               <Input
                 className='flex-1'
                 value={newName}
-                placeholder='Organization name (e.g. Acme)'
+                placeholder='Department name (e.g. Ministry of Finance)'
                 onChange={(e) => setNewName(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && !creating && newName.trim()) {
@@ -213,14 +213,14 @@ export function OrganizationsPanel() {
           </div>
 
           <div className='flex flex-col gap-2'>
-            <div className='text-sm font-semibold text-text-primary'>Your organizations</div>
+            <div className='text-sm font-semibold text-text-primary'>Your departments</div>
             {loadingOrgs && organizations.length === 0 ? (
               <div className='py-4 text-center text-sm text-text-secondary'>
                 <Progress />
               </div>
             ) : organizations.length === 0 ? (
               <div className='py-4 text-center text-sm text-text-secondary'>
-                You don&apos;t belong to any organizations yet
+                You don&apos;t belong to any departments yet
               </div>
             ) : (
               organizations.map((o) => (
@@ -264,7 +264,7 @@ export function OrganizationsPanel() {
 
               {readOnly ? (
                 <div className='py-4 text-center text-sm text-text-secondary'>
-                  You&apos;re a member of this organization. Only org admins can manage members.
+                  You&apos;re a member of this department. Only department admins can manage members.
                 </div>
               ) : (
                 <>
@@ -349,7 +349,7 @@ export function OrganizationsPanel() {
                               data-testid={`org-member-remove-${m.uid}`}
                               onSelect={() => void handleRemoveMember(m.uid)}
                             >
-                              Remove from organization
+                              Remove from department
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>

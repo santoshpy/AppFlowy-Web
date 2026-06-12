@@ -1,7 +1,7 @@
 {
-  "appName": "AppFlowy",
+  "appName": "Abhilekh",
   "defaultUsername": "Me",
-  "welcomeText": "Welcome to @:appName",
+  "welcomeText": "Welcome to $t(appName)",
   "welcomeTo": "Welcome to",
   "githubStarText": "Star on GitHub",
   "subscribeNewsletterText": "Subscribe to Newsletter",
@@ -37,7 +37,7 @@
     "emailAlreadyRegistered": "This email is already registered."
   },
   "signIn": {
-    "loginTitle": "Login to @:appName",
+    "loginTitle": "Login to $t(appName)",
     "loginButtonText": "Log in",
     "loginStartWithAnonymous": "Continue with an anonymous session",
     "continueAnonymousUser": "Continue with an anonymous session",
@@ -119,7 +119,7 @@
     "resetWorkspacePrompt": "Resetting the workspace will delete all pages and data within it. Are you sure you want to reset the workspace? Alternatively, you can contact the support team to restore the workspace",
     "hint": "workspace",
     "notFoundError": "Workspace not found",
-    "failedToLoad": "Something went wrong! Failed to load the workspace. Try to close any open instance of @:appName and try again.",
+    "failedToLoad": "Something went wrong! Failed to load the workspace. Try to close any open instance of $t(appName) and try again.",
     "errorActions": {
       "reportIssue": "Report an issue",
       "reportIssueOnGithub": "Report an issue on Github",
@@ -161,7 +161,7 @@
     "csv": "CSV",
     "copyLink": "Copy link",
     "publishToTheWeb": "Publish to Web",
-    "publishToTheWebHint": "Create a website with AppFlowy",
+    "publishToTheWebHint": "Create a website with Abhilekh",
     "publish": "Publish",
     "unPublish": "Unpublish",
     "visitSite": "Visit site",
@@ -175,7 +175,7 @@
     "exportPdfError": "Failed to export PDF",
     "publishTab": "Publish",
     "shareTab": "Share",
-    "publishOnAppFlowy": "Publish on AppFlowy",
+    "publishOnAppFlowy": "Publish on Abhilekh",
     "shareTabTitle": "Invite to collaborate",
     "shareTabDescription": "For easy collaboration with anyone",
     "copyLinkSuccess": "Copied link to clipboard",
@@ -286,9 +286,9 @@
   "newBoardText": "New board",
   "chat": {
     "newChat": "AI Chat",
-    "inputMessageHint": "Ask @:appName AI",
-    "inputLocalAIMessageHint": "Ask @:appName Local AI",
-    "unsupportedCloudPrompt": "This feature is only available when using @:appName Cloud",
+    "inputMessageHint": "Ask $t(appName) AI",
+    "inputLocalAIMessageHint": "Ask $t(appName) Local AI",
+    "unsupportedCloudPrompt": "This feature is only available when using $t(appName) Cloud",
     "relatedQuestion": "Suggested",
     "serverUnavailable": "Connection lost. Please check your internet and",
     "aiServerUnavailable": "The AI service is temporarily unavailable. Please try again later.",
@@ -328,7 +328,7 @@
     "placeholder": "Hi {{name}}, how can I help you today?",
     "dear": "Dear",
     "input": {
-      "placeholder": "Ask AppFlowy AI",
+      "placeholder": "Ask Abhilekh AI",
       "placeholderFormat": "AI response will generate with the format you define above",
       "button": {
         "format": "Format response",
@@ -823,17 +823,17 @@
     "manageData": {
       "menuLabel": "Manage data",
       "title": "Manage data",
-      "description": "Manage your AppFlowy workspace data",
+      "description": "Manage your Abhilekh workspace data",
       "importWorkspace": {
         "title": "Import your workspace",
-        "tooltip": "Import your workspace from an AppFlowy backup ZIP file",
+        "tooltip": "Import your workspace from an Abhilekh backup ZIP file",
         "button": "Import",
         "success": "Import started. We will send a confirmation email once the import is complete.",
         "failed": "Failed to import workspace"
       },
       "backupWorkspace": {
         "title": "Backup your workspace",
-        "tooltip": "Back up your AppFlowy workspace to a ZIP file",
+        "tooltip": "Back up your Abhilekh workspace to a ZIP file",
         "button": "Backup",
         "started": "Backup started. We will send an email with a download link once the export is complete.",
         "failed": "Failed to back up workspace"
@@ -971,7 +971,7 @@
     "manageDataPage": {
       "menuLabel": "Manage data",
       "title": "Manage data",
-      "description": "Manage data local storage or Import your existing data into @:appName.",
+      "description": "Manage data local storage or Import your existing data into $t(appName).",
       "dataStorage": {
         "title": "File storage location",
         "tooltip": "The location where your files are stored",
@@ -990,8 +990,8 @@
       },
       "importData": {
         "title": "Import data",
-        "tooltip": "Import data from @:appName backups/data folders",
-        "description": "Copy data from an external @:appName data folder",
+        "tooltip": "Import data from $t(appName) backups/data folders",
+        "description": "Copy data from an external $t(appName) data folder",
         "action": "Browse file"
       },
       "encryption": {
@@ -1134,8 +1134,8 @@
       "menuLabel": "AI Settings",
       "keys": {
         "enableAISearchTitle": "AI Search",
-        "aiSettingsDescription": "Choose your preferred model to power AppFlowy AI. Now includes GPT 4-o, Claude 3,5, Llama 3.1, and Mistral 7B",
-        "loginToEnableAIFeature": "AI features are only enabled after logging in with @:appName Cloud. If you don't have an @:appName account, go to 'My Account' to sign up",
+        "aiSettingsDescription": "Choose your preferred model to power Abhilekh AI. Now includes GPT 4-o, Claude 3,5, Llama 3.1, and Mistral 7B",
+        "loginToEnableAIFeature": "AI features are only enabled after logging in with $t(appName) Cloud. If you don't have an $t(appName) account, go to 'My Account' to sign up",
         "llmModel": "Language Model",
         "llmModelType": "Language Model Type",
         "downloadLLMPrompt": "Download {}",
@@ -1156,7 +1156,7 @@
         "offlineAIInstruction1": "Follow the",
         "offlineAIInstruction2": "instruction",
         "offlineAIInstruction3": "to enable offline AI.",
-        "offlineAIDownload1": "If you have not downloaded the AppFlowy AI, please",
+        "offlineAIDownload1": "If you have not downloaded the Abhilekh AI, please",
         "offlineAIDownload2": "download",
         "offlineAIDownload3": "it first",
         "activeOfflineAI": "Active",
@@ -1184,7 +1184,7 @@
         "aiMaxToggle": "Unlimited AI and access to advanced models",
         "aiOnDeviceToggle": "Local AI for ultimate privacy",
         "aiCredit": {
-          "title": "Add @:appName AI Credit",
+          "title": "Add $t(appName) AI Credit",
           "price": "{}",
           "priceDescription": "for 1,000 credits",
           "purchase": "Purchase AI",
@@ -1224,7 +1224,7 @@
         "deal": {
           "bannerLabel": "New year deal!",
           "title": "Grow your team!",
-          "info": "Upgrade and save 10% off Pro and Team plans! Boost your workspace productivity with powerful new features including @:appName AI.",
+          "info": "Upgrade and save 10% off Pro and Team plans! Boost your workspace productivity with powerful new features including $t(appName) AI.",
           "viewPlans": "View plans"
         }
       }
@@ -1332,7 +1332,7 @@
       },
       "paymentSuccess": {
         "title": "You are now on the {} plan!",
-        "description": "Your payment has been successfully processed and your plan is upgraded to @:appName {}. You can view your plan details on the Plan page"
+        "description": "Your payment has been successfully processed and your plan is upgraded to $t(appName) {}. You can view your plan details on the Plan page"
       },
       "downgradeDialog": {
         "title": "Are you sure you want to downgrade your plan?",
@@ -1342,11 +1342,11 @@
     },
     "cancelSurveyDialog": {
       "title": "Sorry to see you go",
-      "description": "We're sorry to see you go. We'd love to hear your feedback to help us improve @:appName. Please take a moment to answer a few questions.",
+      "description": "We're sorry to see you go. We'd love to hear your feedback to help us improve $t(appName). Please take a moment to answer a few questions.",
       "commonOther": "Other",
       "otherHint": "Write your answer here",
       "questionOne": {
-        "question": "What prompted you to cancel your @:appName Pro subscription?",
+        "question": "What prompted you to cancel your $t(appName) Pro subscription?",
         "answerOne": "Cost too high",
         "answerTwo": "Features did not meet expectations",
         "answerThree": "Found a better alternative",
@@ -1354,7 +1354,7 @@
         "answerFive": "Service issue or technical difficulties"
       },
       "questionTwo": {
-        "question": "How likely are you to consider re-subscribing to @:appName Pro in the future?",
+        "question": "How likely are you to consider re-subscribing to $t(appName) Pro in the future?",
         "answerOne": "Very likely",
         "answerTwo": "Somewhat likely",
         "answerThree": "Not sure",
@@ -1369,7 +1369,7 @@
         "answerFour": "Access to local AI models"
       },
       "questionFour": {
-        "question": "How would you describe your overall experience with @:appName?",
+        "question": "How would you describe your overall experience with $t(appName)?",
         "answerOne": "Great",
         "answerTwo": "Good",
         "answerThree": "Average",
@@ -1403,8 +1403,8 @@
       "cloudServerType": "Cloud server",
       "cloudServerTypeTip": "Please note that it might log out your current account after switching the cloud server",
       "cloudLocal": "Local",
-      "cloudAppFlowy": "@:appName Cloud",
-      "cloudAppFlowySelfHost": "@:appName Cloud Self-hosted",
+      "cloudAppFlowy": "$t(appName) Cloud",
+      "cloudAppFlowySelfHost": "$t(appName) Cloud Self-hosted",
       "appFlowyCloudUrlCanNotBeEmpty": "The cloud url can't be empty",
       "clickToCopy": "Copy to clipboard",
       "selfHostStart": "If you don't have a server, please refer to the",
@@ -1427,12 +1427,12 @@
       "historicalUserList": "User login history",
       "historicalUserListTooltip": "This list displays your anonymous accounts. You can click on an account to view its details. Anonymous accounts are created by clicking the 'Get Started' button",
       "openHistoricalUser": "Click to open the anonymous account",
-      "customPathPrompt": "Storing the @:appName data folder in a cloud-synced folder such as Google Drive can pose risks. If the database within this folder is accessed or modified from multiple locations at the same time, it may result in synchronization conflicts and potential data corruption",
-      "importAppFlowyData": "Import Data from External @:appName Folder",
+      "customPathPrompt": "Storing the $t(appName) data folder in a cloud-synced folder such as Google Drive can pose risks. If the database within this folder is accessed or modified from multiple locations at the same time, it may result in synchronization conflicts and potential data corruption",
+      "importAppFlowyData": "Import Data from External $t(appName) Folder",
       "importingAppFlowyDataTip": "Data import is in progress. Please do not close the app",
-      "importAppFlowyDataDescription": "Copy data from an external @:appName data folder and import it into the current AppFlowy data folder",
-      "importSuccess": "Successfully imported the @:appName data folder",
-      "importFailed": "Importing the @:appName data folder failed",
+      "importAppFlowyDataDescription": "Copy data from an external $t(appName) data folder and import it into the current Abhilekh data folder",
+      "importSuccess": "Successfully imported the $t(appName) data folder",
+      "importFailed": "Importing the $t(appName) data folder failed",
       "importGuide": "For further details, please check the referenced document"
     },
     "notifications": {
@@ -1533,7 +1533,7 @@
       "themeUpload": {
         "button": "Upload",
         "uploadTheme": "Upload theme",
-        "description": "Upload your own @:appName theme using the button below.",
+        "description": "Upload your own $t(appName) theme using the button below.",
         "loading": "Please wait while we validate and upload your theme...",
         "uploadSuccess": "Your theme was uploaded successfully",
         "deletionFailure": "Failed to delete the theme. Try to delete it manually.",
@@ -1600,7 +1600,7 @@
         "memberLimitExceeded": "Member limit reached, to invite more members, please ",
         "memberLimitExceededUpgrade": "upgrade",
         "memberLimitExceededPro": "Member limit reached, if you require more members contact ",
-        "memberLimitExceededProContact": "support@appflowy.io",
+        "memberLimitExceededProContact": "support@abhilekh.gov.np",
         "failedToAddMember": "Failed to add member",
         "addMemberSuccess": "Member added successfully",
         "removeMember": "Remove Member",
@@ -1616,7 +1616,7 @@
       "defaultLocation": "Read files and data storage location",
       "exportData": "Export your data",
       "doubleTapToCopy": "Double tap to copy the path",
-      "restoreLocation": "Restore to @:appName default path",
+      "restoreLocation": "Restore to $t(appName) default path",
       "customizeLocation": "Open another folder",
       "restartApp": "Please restart app for the changes to take effect.",
       "exportDatabase": "Export database",
@@ -1628,10 +1628,10 @@
       "defineWhereYourDataIsStored": "Define where your data is stored",
       "open": "Open",
       "openFolder": "Open an existing folder",
-      "openFolderDesc": "Read and write it to your existing @:appName folder",
+      "openFolderDesc": "Read and write it to your existing $t(appName) folder",
       "folderHintText": "folder name",
       "location": "Creating a new folder",
-      "locationDesc": "Pick a name for your @:appName data folder",
+      "locationDesc": "Pick a name for your $t(appName) data folder",
       "browser": "Browse",
       "create": "Create",
       "set": "Set",
@@ -1642,7 +1642,7 @@
       "change": "Change",
       "openLocationTooltips": "Open another data directory",
       "openCurrentDataFolder": "Open current data directory",
-      "recoverLocationTooltips": "Reset to @:appName's default data directory",
+      "recoverLocationTooltips": "Reset to $t(appName)'s default data directory",
       "exportFileSuccess": "Export file successfully!",
       "exportFileFail": "Export file failed!",
       "export": "Export",
@@ -2660,7 +2660,7 @@
     "deleteEventPrompt_other": "Are you sure you want to delete these events? This action cannot be undone."
   },
   "errorDialog": {
-    "title": "@:appName Error",
+    "title": "$t(appName) Error",
     "howToFixFallback": "We're sorry for the inconvenience! Submit an issue on our GitHub page that describes your error.",
     "howToFixFallbackHint1": "We're sorry for the inconvenience! Submit an issue on our ",
     "howToFixFallbackHint2": " page that describes your error.",
@@ -3108,10 +3108,10 @@
     "pageCover": "Page cover",
     "none": "None",
     "openSettings": "Open Settings",
-    "photoPermissionTitle": "@:appName would like to access your photo library",
-    "photoPermissionDescription": "@:appName needs access to your photos to let you add images to your documents",
-    "cameraPermissionTitle": "@:appName would like to access your camera",
-    "cameraPermissionDescription": "@:appName needs access to your camera to let you add images to your documents from the camera",
+    "photoPermissionTitle": "$t(appName) would like to access your photo library",
+    "photoPermissionDescription": "$t(appName) needs access to your photos to let you add images to your documents",
+    "cameraPermissionTitle": "$t(appName) would like to access your camera",
+    "cameraPermissionDescription": "$t(appName) needs access to your camera to let you add images to your documents from the camera",
     "doNotAllow": "Don't Allow",
     "image": "Image"
   },
@@ -3187,7 +3187,7 @@
     "reportPage": "Report page",
     "databaseHasNotBeenPublished": "Publishing a database is not supported yet.",
     "createdWith": "Created with",
-    "downloadApp": "Download AppFlowy",
+    "downloadApp": "Download Abhilekh",
     "copy": {
       "codeBlock": "The content of code block has been copied to the clipboard",
       "imageBlock": "The image link has been copied to the clipboard",
@@ -3200,7 +3200,7 @@
     "publishFailed": "Failed to publish",
     "unpublishFailed": "Failed to unpublish",
     "noAccessToVisit": "No access to this page...",
-    "createWithAppFlowy": "Create a website with AppFlowy",
+    "createWithAppFlowy": "Create a website with Abhilekh",
     "fastWithAI": "Fast and easy with AI.",
     "tryItNow": "Try it now",
     "onlyGridViewCanBePublished": "Only Grid view can be published",
@@ -3218,7 +3218,7 @@
     "selectWorkspace": "Select a workspace",
     "addTo": "Add to",
     "duplicateSuccessfully": "Added to your workspace",
-    "duplicateSuccessfullyDescription": "Don't have AppFlowy installed? The download will start automatically after you click 'Download'.",
+    "duplicateSuccessfullyDescription": "Don't have Abhilekh installed? The download will start automatically after you click 'Download'.",
     "downloadIt": "Download",
     "openApp": "Open in app",
     "duplicateFailed": "Duplicated failed",
@@ -3245,7 +3245,7 @@
     "signingIn": "Signing in...",
     "moreOptions": "More options",
     "collapse": "Collapse",
-    "signInAgreement": "By clicking \"Continue\" above, you agreed to AppFlowy's",
+    "signInAgreement": "By clicking \"Continue\" above, you agreed to Abhilekh's",
     "and": "and",
     "termOfUse": "Terms",
     "privacyPolicy": "Privacy Policy",
@@ -3260,14 +3260,14 @@
     },
     "importNotion": "Import from Notion",
     "importWorkspace": "Import workspace",
-    "importFromAppFlowy": "Import from AppFlowy",
+    "importFromAppFlowy": "Import from Abhilekh",
     "importFromNotion": "Import from Notion",
     "import": "Import",
     "importSuccess": "Uploaded successfully",
     "importSuccessMessage": "We'll notify you when the import is complete. After that, you can view your imported pages in the sidebar.",
     "importFailed": "Import failed, please check the file format",
     "dropNotionFile": "Drop your Notion zip file here to upload, or click to browse",
-    "dropAppFlowyFile": "Drop your AppFlowy zip file here to upload, or click to browse",
+    "dropAppFlowyFile": "Drop your Abhilekh zip file here to upload, or click to browse",
     "error": {
       "pageNameIsEmpty": "The page name is empty, please try another one"
     },
@@ -3425,7 +3425,7 @@
     "joinWorkspace": "Join workspace",
     "success": "You've successfully joined the workspace",
     "successMessage": "You can now access all the pages and workspaces within it.",
-    "openWorkspace": "Open AppFlowy",
+    "openWorkspace": "Open Abhilekh",
     "alreadyAccepted": "You've already accepted the invitation",
     "errorModal": {
       "title": "Something went wrong",
@@ -3451,7 +3451,7 @@
     "title": "Approve Workspace Join Request",
     "requestSummary": "<user/> requests to join <workspace/> and access <page/>",
     "upgrade": "upgrade",
-    "downloadApp": "Download AppFlowy",
+    "downloadApp": "Download Abhilekh",
     "approveButton": "Approve",
     "approveSuccess": "Approved successfully",
     "approveError": "Failed to approve, ensure the workspace plan limit is not exceeded",
@@ -3472,7 +3472,7 @@
   "upgradePlanModal": {
     "title": "Upgrade to Pro",
     "message": "{{name}} has reached the free member limit. Upgrade to the Pro Plan to invite more members.",
-    "upgradeSteps": "How to upgrade your plan on AppFlowy:",
+    "upgradeSteps": "How to upgrade your plan on Abhilekh:",
     "step1": "1. Go to Settings",
     "step2": "2. Click on 'Plan'",
     "step3": "3. Select 'Change Plan'",
@@ -3624,11 +3624,11 @@
     "cancelPlan": {
       "title": "Sorry to see you go",
       "success": "Your subscription has been canceled successfully",
-      "description": "We're sorry to see you go. We'd love to hear your feedback to help us improve AppFlowy. Please take a moment to answer a few questions.",
+      "description": "We're sorry to see you go. We'd love to hear your feedback to help us improve Abhilekh. Please take a moment to answer a few questions.",
       "commonOther": "Other",
       "otherHint": "Write your answer here",
       "questionOne": {
-        "question": "What prompted you to cancel your AppFlowy Pro subscription?",
+        "question": "What prompted you to cancel your Abhilekh Pro subscription?",
         "answerOne": "Cost too high",
         "answerTwo": "Features did not meet expectations",
         "answerThree": "Found a better alternative",
@@ -3636,7 +3636,7 @@
         "answerFive": "Service issue or technical difficulties"
       },
       "questionTwo": {
-        "question": "How likely are you to consider re-subscribing to AppFlowy Pro in the future?",
+        "question": "How likely are you to consider re-subscribing to Abhilekh Pro in the future?",
         "answerOne": "Very likely",
         "answerTwo": "Somewhat likely",
         "answerThree": "Not sure",
@@ -3651,7 +3651,7 @@
         "answerFour": "Access to local AI models"
       },
       "questionFour": {
-        "question": "How would you describe your overall experience with AppFlowy?",
+        "question": "How would you describe your overall experience with Abhilekh?",
         "answerOne": "Great",
         "answerTwo": "Good",
         "answerThree": "Average",
@@ -3677,7 +3677,7 @@
   "publishSelectedViews": "Publish {{count}} selected views",
   "untitled": "Untitled",
   "addToWorkspace": "Added to your workspace",
-  "downloadTip": "Don't have AppFlowy Apps installed? Download <link/>.",
+  "downloadTip": "Don't have Abhilekh Apps installed? Download <link/>.",
   "here": "here",
   "openInBrowser": "Open in browser",
   "openInApp": "Open in app",
@@ -3733,7 +3733,7 @@
       "description": "Congratulations! You just unlocked more workspace members and unlimited AI responses. 🎉"
     },
     "inviteMember": {
-      "title": "Join <workspace /> on AppFlowy",
+      "title": "Join <workspace /> on Abhilekh",
       "description": "You've been invited by <who />\nto join the workspace using this email:\n<email/>\nIf this isn't correct, please ask your collaborators to resend the invite.",
       "joinWorkspace": "Join workspace",
       "invalid": "Unable to open invitation",
@@ -3763,7 +3763,7 @@
     },
     "unauthorized": {
       "title": "Sign in required",
-      "description": "You need to sign in to access this page. Please sign in with your AppFlowy account.",
+      "description": "You need to sign in to access this page. Please sign in with your Abhilekh account.",
       "signIn": "Sign in"
     },
     "forbidden": {
@@ -3778,7 +3778,7 @@
     },
     "networkError": {
       "title": "Connection error",
-      "description": "Unable to connect to AppFlowy. Please check your internet connection and try again.",
+      "description": "Unable to connect to Abhilekh. Please check your internet connection and try again.",
       "retry": "Retry connection"
     },
     "invalidLink": {

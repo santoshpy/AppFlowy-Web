@@ -1,6 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import React, { useEffect, useMemo } from 'react';
 
+import { BRAND } from '@/application/brand';
 import { getUserIconUrl } from '@/application/user-metadata';
 import { useAIChatContext } from '@/components/ai-chat/AIChatProvider';
 import { useAppOperations, useCurrentWorkspaceId } from '@/components/app/app.hooks';
@@ -123,7 +124,7 @@ export function AIChat({ chatId, onRendered }: { chatId: string; onRendered?: ()
             <div className={'mb-2 text-base'}>{`Chat listings only. For full chat features:`}</div>
             <ul className={'px-2 text-text-secondary'}>
               <li>• Use desktop browser</li>
-              <li>{`• Download AppFlowy's mobile app`}</li>
+              <li>{`• Download ${BRAND.name}'s mobile app`}</li>
             </ul>
           </DialogContent>
           <DialogActions className={'flex w-full items-center justify-center gap-2 p-4'}>

@@ -1,10 +1,11 @@
-import { Button, Divider, Portal, Tooltip } from '@mui/material';
+import { Button, Portal, Tooltip } from '@mui/material';
 import Box from '@mui/material/Box';
 import { PopoverProps } from '@mui/material/Popover';
 import * as React from 'react';
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { BRAND } from '@/application/brand';
 import { ReactComponent as BugIcon } from '@/assets/icons/bug.svg';
 import { ReactComponent as FeedbackIcon } from '@/assets/icons/feedback.svg';
 import { ReactComponent as SupportIcon } from '@/assets/icons/help.svg';
@@ -62,7 +63,7 @@ export default function Help() {
             <Button
               component={'a'}
               target='_blank'
-              href={'https://www.appflowy.com/what-is-new'}
+              href={BRAND.url}
               className={'justify-start'}
               color={'inherit'}
               startIcon={<WhatsNewIcon />}
@@ -72,7 +73,7 @@ export default function Help() {
             </Button>
             <Button
               component={'a'}
-              href={'https://appflowy.com/guide/getting-started-with-appflowy'}
+              href={BRAND.docsUrl}
               className={'justify-start'}
               target='_blank'
               color={'inherit'}
@@ -83,7 +84,7 @@ export default function Help() {
             </Button>
             <Button
               component={'a'}
-              href={'https://discord.gg/9Q2xaN37tV'}
+              href={BRAND.docsUrl}
               className={'justify-start'}
               target='_blank'
               color={'inherit'}
@@ -113,48 +114,13 @@ export default function Help() {
             <Button
               component={'a'}
               target='_blank'
-              href={'https://github.com/AppFlowy-IO/AppFlowy-Web/issues/new/choose'}
+              href={`mailto:${BRAND.supportEmail}`}
               className={'justify-start'}
               color={'inherit'}
               startIcon={<FeedbackIcon />}
               variant={'text'}
             >
               {t('questionBubble.feedback')}
-            </Button>
-
-            <Divider />
-            <Button
-              size={'small'}
-              target='_blank'
-              component={'a'}
-              href={'https://forum.appflowy.io/'}
-              className={'justify-start text-text-secondary'}
-              color={'inherit'}
-              variant={'text'}
-            >
-              Community Forum
-            </Button>
-            <Button
-              size={'small'}
-              component={'a'}
-              target='_blank'
-              href={'https://x.com/appflowy'}
-              className={'justify-start text-text-secondary'}
-              color={'inherit'}
-              variant={'text'}
-            >
-              Twitter - @appflowy
-            </Button>
-            <Button
-              size={'small'}
-              component={'a'}
-              target='_blank'
-              href={'https://www.reddit.com/r/AppFlowy/'}
-              className={'justify-start text-text-secondary'}
-              color={'inherit'}
-              variant={'text'}
-            >
-              Reddit - r/appflowy
             </Button>
           </div>
         </Popover>

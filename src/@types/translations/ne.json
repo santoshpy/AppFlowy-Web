@@ -1,0 +1,84 @@
+{
+  "appName": "अभिलेख",
+  "welcomeText": "$t(appName) मा स्वागत छ",
+  "welcomeTo": "स्वागत छ",
+  "button": {
+    "ok": "ठीक छ",
+    "confirm": "पुष्टि गर्नुहोस्",
+    "done": "भयो",
+    "cancel": "रद्द गर्नुहोस्",
+    "apply": "लागू गर्नुहोस्",
+    "signIn": "साइन इन",
+    "signOut": "साइन आउट",
+    "complete": "पूरा भयो",
+    "save": "सुरक्षित गर्नुहोस्",
+    "keep": "राख्नुहोस्",
+    "tryAgain": "फेरि प्रयास गर्नुहोस्",
+    "discard": "खारेज गर्नुहोस्",
+    "upload": "अपलोड गर्नुहोस्",
+    "edit": "सम्पादन गर्नुहोस्",
+    "delete": "मेट्नुहोस्",
+    "copy": "प्रतिलिपि गर्नुहोस्",
+    "duplicate": "नक्कल बनाउनुहोस्",
+    "update": "अद्यावधिक गर्नुहोस्",
+    "share": "साझेदारी गर्नुहोस्",
+    "addToFavorites": "मनपर्नेमा थप्नुहोस्",
+    "removeFromFavorites": "मनपर्नेबाट हटाउनुहोस्"
+  },
+  "signIn": {
+    "loginButtonText": "लग इन",
+    "forgotPassword": "पासवर्ड बिर्सनुभयो?",
+    "emailHint": "इमेल",
+    "passwordHint": "पासवर्ड",
+    "dontHaveAnAccount": "खाता छैन?",
+    "createAccount": "खाता खोल्नुहोस्",
+    "logIn": "लग इन",
+    "enterPassword": "पासवर्ड हाल्नुहोस्",
+    "enterPasswordTip": "पासवर्ड हाल्नुहोस्",
+    "continueToSignInWithPassword": "पासवर्डसहित साइन इन गर्न जारी राख्नुहोस्",
+    "signInWithPassword": "पासवर्डसहित साइन इन गर्नुहोस्",
+    "signInWithEmail": "इमेलसहित साइन इन गर्नुहोस्",
+    "pleaseInputYourEmail": "कृपया आफ्नो इमेल हाल्नुहोस्",
+    "invalidEmail": "अमान्य इमेल",
+    "settings": "सेटिङ"
+  },
+  "web": {
+    "continue": "जारी राख्नुहोस्",
+    "or": "वा",
+    "emailPlaceholder": "कृपया आफ्नो इमेल ठेगाना हाल्नुहोस्",
+    "signingIn": "साइन इन हुँदै...",
+    "moreOptions": "थप विकल्पहरू",
+    "collapse": "संक्षिप्त गर्नुहोस्",
+    "signInAgreement": "माथि \"जारी राख्नुहोस्\" थिचेर, तपाईंले अभिलेखका निम्न कुरामा सहमति जनाउनुहुन्छ:",
+    "and": "र",
+    "termOfUse": "सर्तहरू",
+    "privacyPolicy": "गोपनीयता नीति",
+    "login": "लग इन",
+    "settings": "सेटिङ",
+    "visitOurWebsite": "हाम्रो वेबसाइट हेर्नुहोस्",
+    "error": "त्रुटि",
+    "import": "आयात गर्नुहोस्",
+    "importSuccess": "सफलतापूर्वक आयात भयो",
+    "importFailed": "आयात असफल भयो"
+  },
+  "settings": {
+    "accountPage": {
+      "menuLabelAccountApp": "खाता र एप",
+      "menuLabelProfile": "प्रोफाइल"
+    },
+    "appearance": {
+      "members": {
+        "label": "सदस्यहरू"
+      }
+    },
+    "manageData": {
+      "menuLabel": "डेटा व्यवस्थापन"
+    }
+  },
+  "questionBubble": {
+    "help": "मद्दत र समर्थन",
+    "whatsNew": "के नयाँ छ",
+    "documentation": "कागजात",
+    "feedback": "प्रतिक्रिया"
+  }
+}

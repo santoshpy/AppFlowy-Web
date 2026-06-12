@@ -13,20 +13,20 @@ const isDev = process.env.NODE_ENV ? process.env.NODE_ENV === 'development' : tr
 const isProd = process.env.NODE_ENV === 'production';
 const isTest = process.env.NODE_ENV === 'test' || process.env.COVERAGE === 'true';
 
-// Substitutes %APPFLOWY_BRAND_*% placeholders in index.html with env values,
-// falling back to the AppFlowy defaults when unset. Keeps the product identity
+// Substitutes {{BRAND_*}} placeholders in index.html with env values, falling
+// back to the Abhilekh defaults when unset. Keeps the product identity
 // config-driven (see src/application/brand.ts) and the literal name out of HTML.
 function brandHtmlPlugin() {
   // loadEnv always reads the base `.env` file regardless of mode, so the chosen
   // mode string here is irrelevant for picking up dev.env/deploy.env values.
   const env = loadEnv('development', process.cwd(), 'APPFLOWY');
   const brand: Record<string, string> = {
-    NAME: env.APPFLOWY_BRAND_NAME || 'AppFlowy',
+    NAME: env.APPFLOWY_BRAND_NAME || 'Abhilekh',
     DESCRIPTION:
       env.APPFLOWY_BRAND_DESCRIPTION ||
-      'AppFlowy is an AI collaborative workspace where you achieve more without losing control of your data',
-    URL: env.APPFLOWY_BRAND_URL || 'https://appflowy.com',
-    TWITTER: env.APPFLOWY_BRAND_TWITTER || '@appflowy',
+      "Abhilekh — Nepal's national platform for managing documents and records across government departments",
+    URL: env.APPFLOWY_BRAND_URL || 'https://abhilekh.gov.np',
+    TWITTER: env.APPFLOWY_BRAND_TWITTER || '',
   };
 
   return {

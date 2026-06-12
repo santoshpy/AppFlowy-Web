@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 
+import { BRAND } from '@/application/brand';
 import { ViewIcon, ViewIconType } from '@/application/types';
 import { getIconBase64 } from '@/utils/emoji';
 
@@ -8,7 +9,7 @@ function ViewHelmet({ name, icon }: { name?: string; icon?: ViewIcon }) {
   useEffect(() => {
     const setFavicon = async () => {
       try {
-        let url = '/appflowy.svg';
+        let url = '/abhilekh.svg';
         const link = (document.querySelector("link[rel*='icon']") as HTMLLinkElement) || document.createElement('link');
 
         if (icon && icon.value) {
@@ -85,7 +86,7 @@ function ViewHelmet({ name, icon }: { name?: string; icon?: ViewIcon }) {
   if (!name) return null;
   return (
     <Helmet>
-      <title>{name} | AppFlowy</title>
+      <title>{`${name} | ${BRAND.name}`}</title>
     </Helmet>
   );
 }

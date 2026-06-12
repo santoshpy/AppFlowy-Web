@@ -1,5 +1,6 @@
 import { Divider } from '@mui/material';
 
+import { BRAND } from '@/application/brand';
 import { ReactComponent as AppFlowyLogo } from '@/assets/icons/appflowy.svg';
 
 function AppFlowyPower({ divider, width }: { divider?: boolean; width?: number }) {
@@ -16,7 +17,7 @@ function AppFlowyPower({ divider, width }: { divider?: boolean; width?: number }
 
       <div
         onClick={() => {
-          window.open('https://appflowy.com', '_blank');
+          window.open(BRAND.url, '_blank');
         }}
         style={{
           width,

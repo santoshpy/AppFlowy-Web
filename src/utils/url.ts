@@ -2,14 +2,17 @@ import isFQDN from 'validator/lib/isFQDN';
 import isIP from 'validator/lib/isIP';
 import isURL from 'validator/lib/isURL';
 
-export const downloadPage = 'https://appflowy.com/download';
+import { BRAND } from '@/application/brand';
 
+export const downloadPage = `${BRAND.url}/download`;
+
+// Mobile deep-link scheme — tied to the native client; not a brand string.
 export const openAppFlowySchema = 'appflowy-flutter://';
 
-export const iosDownloadLink = 'https://apps.apple.com/app/appflowy/id6457261352';
-export const androidDownloadLink = 'https://play.google.com/store/apps/details?id=io.appflowy.appflowy';
+export const iosDownloadLink = `${BRAND.url}/download`;
+export const androidDownloadLink = `${BRAND.url}/download`;
 
-export const desktopDownloadLink = 'https://appflowy.com/download/#pop';
+export const desktopDownloadLink = `${BRAND.url}/download`;
 
 export function isValidUrl(input: string) {
   return isURL(input, { require_protocol: true, require_host: false });
