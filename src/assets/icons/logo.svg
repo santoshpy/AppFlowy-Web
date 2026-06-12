@@ -1,5 +1,4 @@
-<svg width='100%' height='100%' viewBox='0 0 41 40' fill='none' xmlns='http://www.w3.org/2000/svg'>
-    <!-- Abhilekh placeholder mark — replace with final brand art. -->
-    <rect x='0.5' width='40' height='40' rx='9' fill='#DC143C'/>
-    <text x='20.5' y='21' font-family="'Kohinoor Devanagari','Devanagari MT','Noto Sans Devanagari',sans-serif" font-size='27' font-weight='700' fill='#FFFFFF' text-anchor='middle' dominant-baseline='central'>अ</text>
+<svg width="100%" height="100%" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="100%" height="100%" rx="9" fill="#DC143C"/>
+  <g transform="matrix(0.03289,0,0,-0.03289,6.8764,30.9034)"><path d="M102 219 22 144C49 109 115 48 229 48C357 48 437 128 437 235C437 239 437 244 437 248C454 240 473 235 496 235C517 235 535 239 549 245V0H665V568H776V660H460V568H549V346C530 336 504 328 467 328C437 328 409 335 384 348C368 360 350 368 333 372V376C374 396 405 443 405 502C405 597 334 663 223 663C147 663 89 629 59 587L134 517C152 546 179 565 220 565C267 565 296 535 296 492C296 441 265 407 204 407H170V309H224C291 309 325 280 325 232C325 184 291 147 230 147C166 147 123 186 102 219Z" fill="#FFFFFF"/></g>
 </svg>

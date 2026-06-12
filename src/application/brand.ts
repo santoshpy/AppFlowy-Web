@@ -15,7 +15,7 @@
 
 const env = import.meta.env;
 
-const url = env.APPFLOWY_BRAND_URL ?? 'https://abhilekh.gov.np';
+const url = env.APPFLOWY_BRAND_URL ?? 'https://abhilekh.app';
 
 export const BRAND = {
   /** Product name shown in titles, the sidebar, dialogs, etc. */
@@ -29,7 +29,7 @@ export const BRAND = {
   /** Twitter/X handle (including the leading @); blank disables social links. */
   twitter: env.APPFLOWY_BRAND_TWITTER ?? '',
   /** Support contact address shown on error/landing pages. */
-  supportEmail: env.APPFLOWY_BRAND_SUPPORT_EMAIL ?? 'support@abhilekh.gov.np',
+  supportEmail: env.APPFLOWY_BRAND_SUPPORT_EMAIL ?? 'support@abhilekh.app',
   /** Legal pages. */
   termsUrl: env.APPFLOWY_BRAND_TERMS_URL ?? `${url}/terms`,
   privacyUrl: env.APPFLOWY_BRAND_PRIVACY_URL ?? `${url}/privacy`,
